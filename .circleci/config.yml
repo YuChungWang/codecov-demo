@@ -13,8 +13,11 @@ jobs:
           name: Install requirements
           command: pip install -r api/requirements.txt
       - run:
-          name: Run test and collect coverage
-          command: pytest --cov=api.calculator
+          name: Run test and collect coverage for calculator
+          command: pytest --cov=api.calculator --cov-report=xml:calculator-coverage.xml
+      - run:
+          name: Run test and collect coverage for smiles
+          command: pytest --cov=api.smiles --cov-report=xml:smiles-coverage.xml
       - codecov/upload
 
 workflows:
