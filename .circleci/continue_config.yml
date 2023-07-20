@@ -15,14 +15,11 @@ jobs:
   test-api:
     docker:
       - image: cimg/python:3.10.2
-    steps:
-      - checkout
-      - run:
           name: Install requirements
           command: pip install -r api/requirements.txt
       - run:
-          name: Run test and collect coverage
-          command: pytest --cov
+          name: Run tests and collect coverage
+          command: pytest --cov --cov-report xml .
       - codecov/upload:
           flags: backend
   test-frontend:
@@ -34,7 +31,7 @@ jobs:
           name: Install requirements
           command: cd web && npm install
       - run:
-          name: Run test and collect coverage
+          name: Run tests and collect coverage
           command: cd web && npm run test
       - codecov/upload:
           flags: frontend
